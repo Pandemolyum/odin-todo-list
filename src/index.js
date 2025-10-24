@@ -1,3 +1,4 @@
+import "./style.css";
 import {Task, projects, displayController} from "./objects.js";
 
 const firstTask = new Task("All Tasks");

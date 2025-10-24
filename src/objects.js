@@ -1,6 +1,6 @@
 class Task {
     constructor(projectName) {
-        this.uuid = randomUUID();
+        this.uuid = self.crypto.randomUUID();
         this.projectName = projectName;
         this.taskName = "";
         this.dueDate = "";
