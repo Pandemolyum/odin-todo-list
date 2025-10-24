@@ -39,11 +39,10 @@ button.project.active {
 
 #completed,
 #notCompleted {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
-    
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
 }
 
 #content {
@@ -56,6 +55,18 @@ button.project.active {
     grid-template-rows: 1fr 1fr;
     background-color: rgb(20, 20, 54);
     padding: 0.5rem 1rem;
+}
+
+.low {
+    border-left: 3px solid rgba(0, 128, 0, 0.5);
+}
+
+.normal {
+    border-left: 3px solid rgba(255, 255, 0, 0.5);
+}
+
+.high {
+    border-left: 3px solid rgba(255, 0, 0, 0.5);
 }
 
 h1, h2 {
