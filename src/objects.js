@@ -45,7 +45,7 @@ const displayController = {
         const compH1 = document.createElement("h1");
         
         nCompDiv.id = "notCompleted";
-        nCompDiv.id = "completed";
+        compDiv.id = "completed";
 
         compH1.textContent = "Completed Tasks";
 
@@ -101,18 +101,57 @@ const displayController = {
         const sideDiv = document.createElement("div");
         const descDiv = document.createElement("div");
         const title = document.createElement("h1");
-        const projectNameLabel = document.createElement("label");
-        const projectNameMenu = document.createElement("select");
+        const projectDiv = document.createElement("div");
+        const projectLabel = document.createElement("label");
+        const projectMenu = document.createElement("select");
+        const dateDiv = document.createElement("div");
+        const dateLabel = document.createElement("label");
+        const dateMenu = document.createElement("select");
+        const priorityDiv = document.createElement("div");
+        const priorityLabel = document.createElement("label");
+        const priorityMenu = document.createElement("select");
+        const completeButton = document.createElement("button");
+        const descButtonDiv = document.createElement("div");
+        const desc = document.createElement("textarea");
+        const discardButton = document.createElement("button");
+        const saveButton = document.createElement("button");
 
-        contentDiv.replaceChildren();
+        this.clearContent();
         
         taskDiv.id = "task";
-        sideDiv.id = "task sidebar";
-        descDiv.id = "task description";
+        sideDiv.id = "sidebar";
+        descDiv.id = "description";
+        projectDiv.className = "inputContainer";
+        dateDiv.className = "inputContainer";
+        priorityDiv.className = "inputContainer";
+        completeButton.className = "task";
+        discardButton.className = "task";
+        saveButton.className = "task";
+        descButtonDiv.className = "descButtonContainer";
 
         title.textContent = task.title;
+        projectLabel.textContent = "Project:";
+        dateLabel.textContent = "Due Date:";
+        priorityLabel.textContent = "Priority:";
+        completeButton.textContent = "Mark Completed";
+        discardButton.textContent = "Discard";
+        saveButton.textContent = "Save";
 
+        projectDiv.append(projectLabel);
+        projectDiv.append(projectMenu);
+        dateDiv.append(dateLabel);
+        dateDiv.append(dateMenu);
+        priorityDiv.append(priorityLabel);
+        priorityDiv.append(priorityMenu);
         sideDiv.append(title);
+        sideDiv.append(projectDiv);
+        sideDiv.append(dateDiv);
+        sideDiv.append(priorityDiv);
+        sideDiv.append(completeButton);
+        descDiv.append(desc);
+        descButtonDiv.append(discardButton);
+        descButtonDiv.append(saveButton);
+        descDiv.append(descButtonDiv);
         taskDiv.append(sideDiv);
         taskDiv.append(descDiv);
         contentDiv.append(taskDiv);
