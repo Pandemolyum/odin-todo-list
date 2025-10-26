@@ -10,6 +10,8 @@ class Task {
     }
 }
 
+// Object for storing and accessing project names and tasks
+// There should only be a single instance of this running
 const projects = {
     list: {"All Tasks": []}, // array to store projects and tasks
 
@@ -20,17 +22,27 @@ const projects = {
     addTask: function(projectName, task) {
         this.list[projectName].push(task);
     },
+
+    getTask: function(uuid) {
+        return this.list["All Tasks"].filter((elem) => elem.uuid === uuid)[0];
+    },
 };
 
+// Handles display by directly modifying DOM
 const displayController = {
+    clearContent: function() {
+        const contentDiv = document.querySelector("#content");
+        contentDiv.replaceChildren();
+    },
+
+    // Displays list of tasks within a certain project
     displayProject: function(projectName, taskArray) {
-        // Clear display and add new divs
+        this.clearContent();
+
         const contentDiv = document.querySelector("#content");
         const nCompDiv = document.createElement("div");
         const compDiv = document.createElement("div");
         const compH1 = document.createElement("h1");
-
-        contentDiv.replaceChildren();
         
         nCompDiv.id = "notCompleted";
         nCompDiv.id = "completed";
@@ -50,10 +62,10 @@ const displayController = {
             }
         });
 
-        // Display project tasks with a few key properties
+        // Display project tasks with a few key properties only
         for (let task of taskArray) {
-            const taskDiv = document.createElement("div"); // need to track this after creation and associate it to task
-            const taskCheck = document.createElement("input")
+            const taskDiv = document.createElement("div");
+            const taskCheck = document.createElement("input");
             const taskTitle = document.createElement("h2");
             const taskDate = document.createElement("span");
             const taskDesc = document.createElement("p");
@@ -81,20 +93,43 @@ const displayController = {
         }
     },
 
-    displayTask: function() {
+    // Displays full task details
+    displayTask: function(task) {
+        // Clear display and add new divs
+        const contentDiv = document.querySelector("#content");
+        const taskDiv = document.createElement("div");
+        const sideDiv = document.createElement("div");
+        const descDiv = document.createElement("div");
+        const title = document.createElement("h1");
+        const projectNameLabel = document.createElement("label");
+        const projectNameMenu = document.createElement("select");
 
+        contentDiv.replaceChildren();
+        
+        taskDiv.id = "task";
+        sideDiv.id = "task sidebar";
+        descDiv.id = "task description";
+
+        title.textContent = task.title;
+
+        sideDiv.append(title);
+        taskDiv.append(sideDiv);
+        taskDiv.append(descDiv);
+        contentDiv.append(taskDiv);
     },
 
-    onChangeTaskPriority: function(task, taskDiv) {
+    // Updates the class of a task element based on its priority
+    // This changes its style. See style.css for more details
+    onChangeTaskPriority: function(task, taskElem) {
         switch (task.priority) {
             case "Low": 
-                taskDiv.classList.add("low");
+                taskElem.classList.add("low");
                 break;
             case "Normal": 
-                taskDiv.classList.add("normal");
+                taskElem.classList.add("normal");
                 break;
             case "High": 
-                taskDiv.classList.add("high");
+                taskElem.classList.add("high");
                 break;
         }
     }

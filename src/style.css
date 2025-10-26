@@ -1,5 +1,10 @@
 @import "./normalize.css";
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     background-color: rgb(0, 0, 39);
     font-size: 1rem;
@@ -47,14 +52,16 @@ button.project.active {
 
 #content {
     background-color: rgb(30, 30, 54);
+    height: 100%;
 }
 
-#content > * > div {
+#content > div > div {
     display: grid;
     grid-template-columns: 0.2fr 3fr 1fr;
     grid-template-rows: 1fr 1fr;
     background-color: rgb(20, 20, 54);
     padding: 0.5rem 1rem;
+    color: white;
 }
 
 .low {
