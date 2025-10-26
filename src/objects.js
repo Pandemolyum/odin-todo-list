@@ -56,6 +56,7 @@ const displayController = {
             taskDiv.appendChild(taskTitle);
             taskDiv.appendChild(taskDate);
             taskDiv.appendChild(taskDesc);
+            taskDiv.setAttribute("uuid", task.uuid);
             
             if (!task.isCompleted) {
                 nCompDiv.appendChild(taskDiv);
