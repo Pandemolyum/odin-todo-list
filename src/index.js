@@ -24,4 +24,5 @@ document.addEventListener("click", (e) => {
 });
 
 console.log(projects.list);
+console.log(Object.keys(projects.list));
 

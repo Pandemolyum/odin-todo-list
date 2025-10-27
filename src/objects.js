@@ -100,13 +100,13 @@ const displayController = {
         const taskDiv = document.createElement("div");
         const sideDiv = document.createElement("div");
         const descDiv = document.createElement("div");
-        const title = document.createElement("h1");
+        const title = document.createElement("textarea");
         const projectDiv = document.createElement("div");
         const projectLabel = document.createElement("label");
         const projectMenu = document.createElement("select");
         const dateDiv = document.createElement("div");
         const dateLabel = document.createElement("label");
-        const dateMenu = document.createElement("select");
+        const dateMenu = document.createElement("input");
         const priorityDiv = document.createElement("div");
         const priorityLabel = document.createElement("label");
         const priorityMenu = document.createElement("select");
@@ -121,10 +121,13 @@ const displayController = {
         taskDiv.id = "task";
         sideDiv.id = "sidebar";
         descDiv.id = "description";
+        title.className = "title";
         projectDiv.className = "inputContainer";
         dateDiv.className = "inputContainer";
+        dateMenu.type = "date";
         priorityDiv.className = "inputContainer";
         completeButton.className = "task";
+        desc.className = "desc";
         discardButton.className = "task";
         saveButton.className = "task";
         descButtonDiv.className = "descButtonContainer";
@@ -136,6 +139,10 @@ const displayController = {
         completeButton.textContent = "Mark Completed";
         discardButton.textContent = "Discard";
         saveButton.textContent = "Save";
+        desc.placeholder = "Describe this task...";
+
+        this.createOptionElems(["Low", "Normal", "High"], priorityMenu, "Normal");
+        this.createOptionElems(Object.keys(projects.list), projectMenu, "All Tasks");
 
         projectDiv.append(projectLabel);
         projectDiv.append(projectMenu);
@@ -171,7 +178,21 @@ const displayController = {
                 taskElem.classList.add("high");
                 break;
         }
-    }
+    },
+
+    createOptionElems: function(nameArr, parent, def) {
+        for (let name of nameArr) {
+            const option = document.createElement("option");
+            option.textContent = name;
+            option.value = name;
+            
+            if (def === name) {
+                option.setAttribute('selected', true);
+            }
+
+            parent.append(option);
+        }
+    },
 };
 
 export {Task, projects, displayController};
