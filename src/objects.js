@@ -56,9 +56,14 @@ const displayController = {
         contentDiv.append(nCompDiv);
         contentDiv.append(compDiv);
 
-        // Update project tab class to change style
+        // Update project tab class to change style of active project
         const projectList = document.querySelectorAll(".project");
+        const previousActive = document.querySelector(".active");
         
+        if (previousActive) {
+            previousActive.classList.remove("active");
+        }
+
         projectList.forEach((elem) => {
             if (elem.textContent === projectName) {
                 elem.classList.add("active");
@@ -108,7 +113,8 @@ const displayController = {
         }
     },
 
-    addProject: function() {
+    // Adds a project to the project tab
+    addProject: function(projectList) {
         const textbox = document.createElement("textarea");
         const parent = document.querySelector("#addProject");
         textbox.placeholder = "Project Name Here...";
@@ -130,7 +136,17 @@ const displayController = {
         });
     
         textbox.addEventListener("blur", () => {
-            console.log("teehee")
+            if (textbox.value !== "") {
+                projectList.addProject(textbox.value);
+                const projectButton = document.createElement("button");
+                const projectParent = parent.parentNode;
+                projectButton.classList.add("project");
+                projectButton.textContent = textbox.value;
+                projectParent.insertBefore(projectButton, projectParent.lastElementChild);
+                console.log(projectParent.lastElementChild)
+            }
+            textbox.remove();
+            parent.textContent = "+ Add Project";
         });
 
         textbox.focus();
