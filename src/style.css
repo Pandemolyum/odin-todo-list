@@ -6,6 +6,8 @@ body {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(0, 0, 39);
     font-size: 1rem;
     color: white;
@@ -13,8 +15,8 @@ body {
 
 header {
     display: flex;
+    flex-wrap: wrap;
     border-bottom: 1px solid white;
-    height: 2.75rem;
 }
 
 .title {
@@ -37,6 +39,7 @@ button#addProject {
     margin-bottom: -1px;
     cursor: pointer;
     z-index: 1;
+    overflow: hidden;
 }
 
 button#addProject {
@@ -202,11 +205,13 @@ textarea.title {
 }
 
 button > textarea {
-    height: 90%;
+    /* height: 2rem; */
     font-size: 1.25rem;
     padding: 0 1rem;
     white-space: nowrap;
     overflow: hidden;
+    field-sizing: content;
+    margin-bottom: -0.3rem;
 }
 
 div.descButtonContainer {
