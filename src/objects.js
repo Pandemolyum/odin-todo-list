@@ -106,7 +106,6 @@ const displayController = {
             // Need to separate some of these into smaller functions
             taskTitle.textContent = task.title;
             taskCheck.type = "checkbox";
-            taskDate.style.justifySelf = "right";
             if (isToday(task.dueDate)) {
                 taskDate.textContent = "Today";
             } else if (isTomorrow(task.dueDate)) {
@@ -128,6 +127,11 @@ const displayController = {
             taskDiv.appendChild(taskTitle);
             taskDiv.appendChild(taskDate);
             taskDiv.appendChild(taskDesc);
+            if (projectName === "All Tasks") {
+                const taskProjName = document.createElement("span");
+                taskProjName.textContent = task.projectName;
+                taskDiv.appendChild(taskProjName);
+            }
             taskDiv.setAttribute("uuid", task.uuid);
             
             if (!task.isCompleted) {
