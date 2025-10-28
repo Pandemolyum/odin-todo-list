@@ -48,7 +48,7 @@ button#addProject {
 
 button.project.active {
     background-color: rgb(30, 30, 54);
-    border-bottom: none;
+    border-bottom: 1px solid rgb(30, 30, 54);
 }
 
 #completed,
