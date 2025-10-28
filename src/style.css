@@ -1,5 +1,12 @@
 @import "./t-normalize.css";
 
+@font-face {
+        font-family: "JacobCursive";
+        src: url("fonts/JacobCursive.ttf") format("truetype");
+        /* font-weight: normal; */
+        /* font-style: normal; */
+    }
+
 html,
 body {
     height: 100%;
@@ -20,8 +27,9 @@ header {
 }
 
 .title {
+    font-family: "JacobCursive";
     font-size: 1.5rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 0.75rem 0;
     margin-bottom: -1px;
 }
 
@@ -214,7 +222,8 @@ textarea.desc {
     height: 100%;
 }
 
-textarea.title {
+textarea.taskTitle {
+    font-size: 1.5rem;
     padding: 0.5rem;
     margin: 0.5rem;
     field-sizing: content;
