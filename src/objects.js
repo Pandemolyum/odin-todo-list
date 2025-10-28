@@ -22,7 +22,11 @@ const projects = {
     },
 
     removeProject: function(name) {
-        delete this.list[name];
+        if (name !== "All Tasks") {
+            delete this.list[name];
+            const projectTab = document.querySelector(".active");
+            projectTab.remove();
+        }
     },
 
     addTask: function(projectName, task) {
@@ -68,10 +72,13 @@ const displayController = {
         const nCompDiv = document.createElement("div");
         const compDiv = document.createElement("div");
         const compH1 = document.createElement("h1");
+        const buttonsDiv = document.createElement("div");
+        const removeProjButton = document.createElement("button");
         const addTaskButton = document.createElement("button");
         
         nCompDiv.id = "notCompleted";
         compDiv.id = "completed";
+        buttonsDiv.id = "projButtons";
 
         compH1.textContent = "Completed Tasks";
         compH1.className = "completeTitle";
@@ -79,10 +86,15 @@ const displayController = {
         addTaskButton.textContent = "+ Add Task";
         addTaskButton.className = "task addTask";
 
+        removeProjButton.textContent = "Delete Project";
+        removeProjButton.className = "task removeProject";
+
         compDiv.append(compH1);
         contentDiv.append(nCompDiv);
         contentDiv.append(compDiv);
-        contentDiv.append(addTaskButton);
+        buttonsDiv.append(removeProjButton);
+        buttonsDiv.append(addTaskButton);
+        contentDiv.append(buttonsDiv);
 
         // Update project tab class to change style of active project
         const projectList = document.querySelectorAll(".project");
@@ -97,6 +109,11 @@ const displayController = {
                 elem.classList.add("active");
             }
         });
+
+        // Remove Delete Project button for All Tasks category only
+        if (document.querySelector(".active").textContent === "All Tasks") {
+            removeProjButton.remove();
+        }
 
         // Handle special case where all tasks from all projects must be displayed
         if (projectName === "All Tasks") {

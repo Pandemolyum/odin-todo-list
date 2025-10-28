@@ -66,13 +66,19 @@ document.addEventListener("click", (e) => {
         activeTask.isCompleted = !activeTask.isCompleted;
         displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.id === "addProject") {
-        // Add project button
+        // When clicking the Add project button
         displayController.addProject(projects);
     } else if (e.target.classList.contains("addTask")) {
-        // Add task button
+        // When clicking the Add task button
         const newTask = new Task(activeProject);
         projects.addTask(activeProject, newTask);
         displayController.displayTask(newTask);
         activeTask = newTask;
+    } else if (e.target.classList.contains("removeProject")) {
+        // When clicking the Remove Project button
+        projects.removeProject(activeProject);
+        console.log("we in")
+        activeProject = "All Tasks";
+        displayController.displayProject(activeProject, projects.list[activeProject]);
     }
 });

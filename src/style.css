@@ -183,7 +183,7 @@ button.task {
     }
 }
 
-button.addTask {
+#projButtons {
     position: fixed;
     right: 0%;
     bottom: 0%;
