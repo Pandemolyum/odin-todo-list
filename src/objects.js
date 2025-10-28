@@ -25,6 +25,10 @@ const projects = {
         this.list[projectName].push(task);
     },
 
+    removeTask: function(projectName, task) {
+        this.list[projectName] = this.list[projectName].filter((e) => e !== task);
+    },
+
     getTask: function(uuid) {
         for (const project of Object.keys(this.list)) {
             let task = this.list[project].filter((elem) => elem.uuid === uuid);

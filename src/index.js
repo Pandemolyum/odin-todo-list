@@ -37,10 +37,15 @@ document.addEventListener("click", (e) => {
         // When clicking the Save button
         const form = document.querySelectorAll('[form="task"]');
         activeTask.title = form[0].value;
-        activeTask.projectName = form[1].value;
+        if (activeTask.projectName !== form[1].value) {
+            projects.removeTask(activeTask.projectName, activeTask);
+            activeTask.projectName = form[1].value;
+            projects.addTask(form[1].value, activeTask);
+        }
         activeTask.dueDate = format(form[2].value.replaceAll("-","/"), "yyyy/MM/dd"); // Necessary conversion to avoid a bug
         activeTask.priority = form[3].value;
         activeTask.description = form[4].value;
+        console.log(projects)
 
         displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.classList.contains("project")) {
