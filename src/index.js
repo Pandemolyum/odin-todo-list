@@ -52,7 +52,6 @@ document.addEventListener("click", (e) => {
         activeTask.dueDate = format(form[2].value.replaceAll("-","/"), "yyyy/MM/dd"); // Necessary conversion to avoid a bug
         activeTask.priority = form[3].value;
         activeTask.description = form[4].value;
-        console.log(projects)
 
         displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.classList.contains("project")) {
@@ -70,15 +69,21 @@ document.addEventListener("click", (e) => {
         displayController.addProject(projects);
     } else if (e.target.classList.contains("addTask")) {
         // When clicking the Add task button
+        activeProject = getActiveProject();
         const newTask = new Task(activeProject);
         projects.addTask(activeProject, newTask);
         displayController.displayTask(newTask);
         activeTask = newTask;
     } else if (e.target.classList.contains("removeProject")) {
         // When clicking the Remove Project button
+        activeProject = getActiveProject();
         projects.removeProject(activeProject);
-        console.log("we in")
         activeProject = "All Tasks";
         displayController.displayProject(activeProject, projects.list[activeProject]);
     }
 });
+
+function getActiveProject() {
+    const activeTab = document.querySelector(".active");
+    return activeTab.textContent;
+}

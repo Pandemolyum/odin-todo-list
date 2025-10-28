@@ -65,7 +65,7 @@ const displayController = {
     },
 
     // Displays list of tasks within a certain project
-    displayProject: function(projectName, taskArray) {
+    displayProject: function(projectName, taskArray = []) {
         this.clearContent();
 
         const contentDiv = document.querySelector("#content");
@@ -197,6 +197,8 @@ const displayController = {
                 projectButton.classList.add("project");
                 projectButton.textContent = textbox.value;
                 projectParent.insertBefore(projectButton, projectParent.lastElementChild);
+
+                this.displayProject(projectButton.textContent);
             }
             textbox.remove();
             parent.textContent = "+ Add Project";
