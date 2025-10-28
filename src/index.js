@@ -17,6 +17,7 @@ displayController.displayProject(activeProject, projects.list[activeProject]);
 
 // Handles click events
 document.addEventListener("click", (e) => {
+    console.log("click")
     // If user clicks on task without slecting the checkbox, display task details
     if (e.target.hasAttribute("uuid")) {
         activeTask = projects.getTask(e.target.getAttribute("uuid"));
@@ -46,6 +47,8 @@ document.addEventListener("click", (e) => {
         activeTask = projects.getTask(uuid);
         activeTask.isCompleted = !activeTask.isCompleted;
         displayController.displayProject(activeProject, projects.list[activeProject]);
+    } else if (e.target.id === "addProject") {
+        displayController.addProject();
     }
 });
 

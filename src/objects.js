@@ -108,6 +108,34 @@ const displayController = {
         }
     },
 
+    addProject: function() {
+        const textbox = document.createElement("textarea");
+        const parent = document.querySelector("#addProject");
+        textbox.placeholder = "Project Name Here...";
+        parent.textContent = "";
+        parent.appendChild(textbox);
+
+        parent.addEventListener("keyup", (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault(); // Prevents spacebar press from triggering click event
+            }
+
+            e.target.value = e.target.value.replace("\n", ""); // Prevents skipping lines
+        });
+
+        // For some reason, keydown is also required to prevent skipping lines
+        // when user holds the Enter button
+        parent.addEventListener("keydown", (e) => {
+            e.target.value = e.target.value.replace("\n", ""); // Prevents skipping lines
+        });
+    
+        textbox.addEventListener("blur", () => {
+            console.log("teehee")
+        });
+
+        textbox.focus();
+    },
+
     // Displays full task details
     displayTask: function(task) {
         // Clear display and add new divs
