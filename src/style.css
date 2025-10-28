@@ -33,6 +33,14 @@ header {
     margin-bottom: -1px;
 }
 
+button:hover,
+textarea:hover {
+    &&:hover {
+        background-color: rgba(240, 255, 255, 0.089);
+        transition: 0.2s;
+    }
+}
+
 button.project,
 button#addProject {
     position: relative;
@@ -48,6 +56,11 @@ button#addProject {
     cursor: pointer;
     z-index: 1;
     overflow: hidden;
+
+    &&:hover {
+        background-color: rgba(240, 255, 255, 0.274);
+        transition: 0.2s;
+    }
 }
 
 button#addProject {
@@ -93,6 +106,11 @@ button.project.active {
     padding: 0.5rem 1rem;
     color: white;
     cursor: pointer;
+
+    &&:hover {
+        background-color: rgba(240, 255, 255, 0.089);
+        transition: 0.2s;
+    }
 }
 
 #content > div#notCompleted > div > p,
