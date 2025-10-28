@@ -88,7 +88,7 @@ const displayController = {
             }
             taskDesc.textContent = task.description;
 
-            if (isBefore(task.dueDate, new Date())) {
+            if (isBefore(task.dueDate, new Date()) && !task.isCompleted) {
                 taskDate.style.color = "red";
             }
 
