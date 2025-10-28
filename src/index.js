@@ -2,13 +2,25 @@ import "./style.css";
 import { Task, projects, displayController } from "./objects.js";
 import { format } from 'date-fns';
 
-// Dummy tasks for now
-const firstTask = new Task("All Tasks");
-projects.addTask("All Tasks", firstTask);
-const secondTask = new Task("All Tasks");
-projects.addTask("All Tasks", secondTask);
-const thirdTask = new Task("All Tasks");
-projects.addTask("All Tasks", thirdTask);
+let storage = false;
+if (isStorageAvailable("localStorage")) {
+  console.log("Woohoo storage is available!")
+  storage = true;
+} else {
+  console.log("No storage available :(")
+}
+
+if (!storage || !localStorage.getItem("projectsList")) {
+    // Start with a few dummy tasks
+    const firstTask = new Task("All Tasks");
+    projects.addTask("All Tasks", firstTask);
+    const secondTask = new Task("All Tasks");
+    projects.addTask("All Tasks", secondTask);
+    const thirdTask = new Task("All Tasks");
+    projects.addTask("All Tasks", thirdTask);
+} else {
+    projects.list = JSON.parse(localStorage.getItem("projectsList"));
+}
 
 let activeTask;
 let activeProject = "All Tasks";
@@ -33,7 +45,7 @@ document.addEventListener("click", (e) => {
     } else if (e.target.className === "task delete") {
         // When clicking the Delete task button
         projects.removeTask(activeProject, activeTask);
-        displayController.displayProject(activeProject, projects.list[activeProject])
+        displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.className === "task discard") {
         // When clicking the Discard button
         displayController.displayProject(activeProject, projects.list[activeProject]);
@@ -81,9 +93,31 @@ document.addEventListener("click", (e) => {
         activeProject = "All Tasks";
         displayController.displayProject(activeProject, projects.list[activeProject]);
     }
+
+    localStorage.setItem("projectsList", JSON.stringify(projects.list));
 });
 
 function getActiveProject() {
     const activeTab = document.querySelector(".active");
     return activeTab.textContent;
+}
+
+// Function copied from https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+function isStorageAvailable(type) {
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      e.name === "QuotaExceededError" &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
 }
