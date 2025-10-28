@@ -1,5 +1,6 @@
 import "./style.css";
 import { Task, projects, displayController } from "./objects.js";
+import { format } from 'date-fns';
 
 // Dummy tasks for now
 const firstTask = new Task("All Tasks");
@@ -37,7 +38,7 @@ document.addEventListener("click", (e) => {
         const form = document.querySelectorAll('[form="task"]');
         activeTask.title = form[0].value;
         activeTask.projectName = form[1].value;
-        activeTask.dueDate = form[2].value;
+        activeTask.dueDate = format(form[2].value.replaceAll("-","/"), "yyyy/MM/dd"); // Necessary conversion to avoid a bug
         activeTask.priority = form[3].value;
         activeTask.description = form[4].value;
 

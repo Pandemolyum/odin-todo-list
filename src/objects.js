@@ -5,7 +5,7 @@ class Task {
         this.uuid = self.crypto.randomUUID();
         this.projectName = projectName;
         this.title = "Untitled";
-        this.dueDate = format(new Date(), "yyyy-MM-dd");
+        this.dueDate = format(new Date(), "yyyy/MM/dd"); // Keep format with "/" delimiters to avoid a bug where one day is subtracted from date while formatting
         this.priority = "Normal";
         this.description = "Lorem ipsum bla bla bla";
         this.isCompleted = false;
@@ -114,11 +114,11 @@ const displayController = {
             } else if (isYesterday(task.dueDate)) {
                 taskDate.textContent = "Yesterday";
             } else {
-                taskDate.textContent = task.dueDate;
+                taskDate.textContent = format(task.dueDate, "dd/MMM/yyyy").replaceAll("/","-"); // Necessary conversion to avoid a bug
             }
             taskDesc.textContent = task.description;
 
-            if (isBefore(task.dueDate, new Date()) && !task.isCompleted) {
+            if (isBefore(task.dueDate, format(new Date(), "yyyy/MM/dd")) && !task.isCompleted) {
                 taskDate.style.color = "red";
             }
 
@@ -239,7 +239,7 @@ const displayController = {
 
         this.createOptionElems(["Low", "Normal", "High"], priorityMenu, task.priority);
         this.createOptionElems(Object.keys(projects.list), projectMenu, task.projectName);
-        dateMenu.value = task.dueDate;
+        dateMenu.value = format(task.dueDate, "yyyy/MM/dd").replaceAll("/","-"); // Necessary conversion to avoid a bug
 
         projectDiv.append(projectLabel);
         projectDiv.append(projectMenu);
