@@ -45,6 +45,7 @@ const displayController = {
         const nCompDiv = document.createElement("div");
         const compDiv = document.createElement("div");
         const compH1 = document.createElement("h1");
+        const addTaskButton = document.createElement("button");
         
         nCompDiv.id = "notCompleted";
         compDiv.id = "completed";
@@ -52,9 +53,13 @@ const displayController = {
         compH1.textContent = "Completed Tasks";
         compH1.className = "completeTitle";
 
+        addTaskButton.textContent = "+ Add Task";
+        addTaskButton.className = "task add";
+
         compDiv.append(compH1);
         contentDiv.append(nCompDiv);
         contentDiv.append(compDiv);
+        contentDiv.append(addTaskButton);
 
         // Update project tab class to change style of active project
         const projectList = document.querySelectorAll(".project");
