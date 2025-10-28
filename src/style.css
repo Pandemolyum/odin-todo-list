@@ -79,7 +79,9 @@ button.project.active {
 }
 
 #content > div#notCompleted > div > p,
-#content > div#notCompleted > div > h2 {
+#content > div#notCompleted > div > h2,
+#content > div#completed > div > p,
+#content > div#completed > div > h2 {
     /* Prevents long desriptions from overflowing */
     overflow: hidden;
     white-space: nowrap;
