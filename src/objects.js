@@ -1,9 +1,11 @@
+import { format } from 'date-fns';
+
 class Task {
     constructor(projectName) {
         this.uuid = self.crypto.randomUUID();
         this.projectName = projectName;
         this.title = "Untitled";
-        this.dueDate = "2025-01-01";
+        this.dueDate = format(new Date(), "yyyy-MM-dd");
         this.priority = "Normal";
         this.description = "Lorem ipsum bla bla bla";
         this.isCompleted = false;
@@ -48,6 +50,7 @@ const displayController = {
         compDiv.id = "completed";
 
         compH1.textContent = "Completed Tasks";
+        compH1.className = "completeTitle";
 
         compDiv.append(compH1);
         contentDiv.append(nCompDiv);
@@ -55,7 +58,7 @@ const displayController = {
 
         // Update project tab class to change style
         const projectList = document.querySelectorAll(".project");
-        console.log(projectList)
+        
         projectList.forEach((elem) => {
             if (elem.textContent === projectName) {
                 elem.classList.add("active");
@@ -126,23 +129,37 @@ const displayController = {
         dateDiv.className = "inputContainer";
         dateMenu.type = "date";
         priorityDiv.className = "inputContainer";
-        completeButton.className = "task";
+        completeButton.className = "task markCompleted";
         desc.className = "desc";
-        discardButton.className = "task";
-        saveButton.className = "task";
+        discardButton.className = "task discard";
+        saveButton.className = "task save";
         descButtonDiv.className = "descButtonContainer";
+        saveButton.type = "submit";
+        desc.placeholder = "Describe this task...";
 
         title.textContent = task.title;
         projectLabel.textContent = "Project:";
         dateLabel.textContent = "Due Date:";
         priorityLabel.textContent = "Priority:";
-        completeButton.textContent = "Mark Completed";
+        completeButton.textContent = (task.isCompleted) ? "Mark Incompleted" : "Mark Completed";
         discardButton.textContent = "Discard";
         saveButton.textContent = "Save";
-        desc.placeholder = "Describe this task...";
+        desc.value = task.description;
 
-        this.createOptionElems(["Low", "Normal", "High"], priorityMenu, "Normal");
-        this.createOptionElems(Object.keys(projects.list), projectMenu, "All Tasks");
+        title.name = "title";
+        projectMenu.name = "project";
+        dateMenu.name = "date";
+        priorityMenu.name = "priority";
+        desc.name = "description";
+        title.setAttribute("Form", "task");
+        projectMenu.setAttribute("Form", "task");
+        dateMenu.setAttribute("Form", "task");
+        priorityMenu.setAttribute("Form", "task");
+        desc.setAttribute("Form", "task");
+
+        this.createOptionElems(["Low", "Normal", "High"], priorityMenu, task.priority);
+        this.createOptionElems(Object.keys(projects.list), projectMenu, task.projectName);
+        dateMenu.value = task.dueDate;
 
         projectDiv.append(projectLabel);
         projectDiv.append(projectMenu);
@@ -195,4 +212,4 @@ const displayController = {
     },
 };
 
-export {Task, projects, displayController};
+export { Task, projects, displayController };
