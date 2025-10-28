@@ -61,7 +61,12 @@ button.project.active {
 }
 
 .completeTitle {
-    grid-column-start: span 2;
+    grid-column-start: span 3;
+
+    /* Prevents task overlap issue with small displays */
+    @media (max-width: 500px) {
+        grid-column: 1 / -1;
+    }
 }
 
 #content {
@@ -73,13 +78,17 @@ button.project.active {
 #content > div#completed > div,
 #content > div#notCompleted > div {
     display: grid;
-    grid-template-columns: 0.3fr 3fr 1fr;
+    grid-template-columns: 0.3fr 3fr 1.5fr;
     grid-template-rows: 1fr 1fr;
     align-items: center;
     background-color: rgb(20, 20, 54);
     padding: 0.5rem 1rem;
     color: white;
     cursor: pointer;
+
+    &&:empty {
+        display: none;
+    }
 }
 
 #content > div#notCompleted > div > p,
