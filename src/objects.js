@@ -21,6 +21,10 @@ const projects = {
         this.list[name] = [];
     },
 
+    removeProject: function(name) {
+        delete this.list[name];
+    },
+
     addTask: function(projectName, task) {
         this.list[projectName].push(task);
     },
@@ -204,6 +208,7 @@ const displayController = {
         const completeButton = document.createElement("button");
         const descButtonDiv = document.createElement("div");
         const desc = document.createElement("textarea");
+        const deleteButton = document.createElement("button");
         const discardButton = document.createElement("button");
         const saveButton = document.createElement("button");
 
@@ -219,6 +224,7 @@ const displayController = {
         priorityDiv.className = "inputContainer";
         completeButton.className = "task markCompleted";
         desc.className = "desc";
+        deleteButton.className = "task delete";
         discardButton.className = "task discard";
         saveButton.className = "task save";
         descButtonDiv.className = "descButtonContainer";
@@ -230,6 +236,7 @@ const displayController = {
         dateLabel.textContent = "Due Date:";
         priorityLabel.textContent = "Priority:";
         completeButton.textContent = (task.isCompleted) ? "Mark Incompleted" : "Mark Completed";
+        deleteButton.textContent = "Delete";
         discardButton.textContent = "Discard";
         saveButton.textContent = "Save";
         desc.value = task.description;
@@ -261,6 +268,7 @@ const displayController = {
         sideDiv.append(priorityDiv);
         sideDiv.append(completeButton);
         descDiv.append(desc);
+        descButtonDiv.append(deleteButton);
         descButtonDiv.append(discardButton);
         descButtonDiv.append(saveButton);
         descDiv.append(descButtonDiv);

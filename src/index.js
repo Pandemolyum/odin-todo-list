@@ -30,18 +30,25 @@ document.addEventListener("click", (e) => {
         // When clicking the Mark Completed/Incompleted button
         activeTask.isCompleted = !activeTask.isCompleted;
         e.target.textContent = (activeTask.isCompleted) ? "Mark Incompleted" : "Mark Completed";
+    } else if (e.target.className === "task delete") {
+        // When clicking the Delete task button
+        projects.removeTask(activeProject, activeTask);
+        displayController.displayProject(activeProject, projects.list[activeProject])
     } else if (e.target.className === "task discard") {
         // When clicking the Discard button
-        displayController.displayProject(activeProject, projects.list[activeProject])
+        displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.className === "task save") {
         // When clicking the Save button
         const form = document.querySelectorAll('[form="task"]');
         activeTask.title = form[0].value;
+
+        // For assigning task to a different project
         if (activeTask.projectName !== form[1].value) {
             projects.removeTask(activeTask.projectName, activeTask);
             activeTask.projectName = form[1].value;
             projects.addTask(form[1].value, activeTask);
         }
+
         activeTask.dueDate = format(form[2].value.replaceAll("-","/"), "yyyy/MM/dd"); // Necessary conversion to avoid a bug
         activeTask.priority = form[3].value;
         activeTask.description = form[4].value;
