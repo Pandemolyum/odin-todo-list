@@ -54,6 +54,7 @@ button.project.active {
     grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
     gap: 0.5rem;
     padding: 1rem 0.5rem;
+    overflow: hidden;
 }
 
 .completeTitle {
@@ -75,6 +76,13 @@ button.project.active {
     padding: 0.5rem 1rem;
     color: white;
     cursor: pointer;
+}
+
+#content > div#notCompleted > div > p,
+#content > div#notCompleted > div > h2 {
+    /* Prevents long desriptions from overflowing */
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .low {
