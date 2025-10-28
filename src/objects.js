@@ -26,7 +26,22 @@ const projects = {
     },
 
     getTask: function(uuid) {
-        return this.list["All Tasks"].filter((elem) => elem.uuid === uuid)[0];
+        for (const project of Object.keys(this.list)) {
+            let task = this.list[project].filter((elem) => elem.uuid === uuid);
+            if (task.length !== 0) {
+                return task[0];
+            }
+        }
+    },
+
+    getAllTasks: function() {
+        const taskArray = [];
+        for (const project of Object.keys(this.list)) {
+            for (const task of this.list[project]) {
+                taskArray.push(task);
+            }
+        }
+        return taskArray;
     },
 };
 
@@ -54,7 +69,7 @@ const displayController = {
         compH1.className = "completeTitle";
 
         addTaskButton.textContent = "+ Add Task";
-        addTaskButton.className = "task add";
+        addTaskButton.className = "task addTask";
 
         compDiv.append(compH1);
         contentDiv.append(nCompDiv);
@@ -75,6 +90,11 @@ const displayController = {
             }
         });
 
+        // Handle special case where all tasks from all projects must be displayed
+        if (projectName === "All Tasks") {
+            taskArray = projects.getAllTasks();
+        }
+        
         // Display project tasks with a few key properties only
         for (let task of taskArray) {
             const taskDiv = document.createElement("div");
@@ -148,7 +168,6 @@ const displayController = {
                 projectButton.classList.add("project");
                 projectButton.textContent = textbox.value;
                 projectParent.insertBefore(projectButton, projectParent.lastElementChild);
-                console.log(projectParent.lastElementChild)
             }
             textbox.remove();
             parent.textContent = "+ Add Project";

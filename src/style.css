@@ -179,7 +179,7 @@ button.task {
     }
 }
 
-button.add {
+button.addTask {
     position: fixed;
     right: 0%;
     bottom: 0%;
@@ -211,7 +211,6 @@ textarea.title {
 }
 
 button > textarea {
-    /* height: 2rem; */
     font-size: 1.25rem;
     padding: 0 1rem;
     white-space: nowrap;
