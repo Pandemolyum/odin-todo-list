@@ -4,10 +4,10 @@ class Task {
     constructor(projectName) {
         this.uuid = self.crypto.randomUUID();
         this.projectName = projectName;
-        this.title = "Untitled";
+        this.title = "Hipster Ipsum";
         this.dueDate = format(new Date(), "yyyy/MM/dd"); // Keep format with "/" delimiters to avoid a bug where one day is subtracted from date while formatting
         this.priority = "Normal";
-        this.description = "Lorem ipsum bla bla bla";
+        this.description = "Ennui four loko deep v master cleanse authentic church-key hexagon readymade vinyl next level neutral milk hotel. Narwhal polaroid man bun normcore. Next level gochujang blue bottle sriracha iceland locavore.";
         this.isCompleted = false;
     }
 }
@@ -62,6 +62,15 @@ const displayController = {
     clearContent: function() {
         const contentDiv = document.querySelector("#content");
         contentDiv.replaceChildren();
+    },
+
+    // Displays project tabs
+    displayProjectTab: function(projectName) {
+        const projectButton = document.createElement("button");
+        const projectParent = document.querySelector("header");
+        projectButton.classList.add("project");
+        projectButton.textContent = projectName;
+        projectParent.insertBefore(projectButton, projectParent.lastElementChild);
     },
 
     // Displays list of tasks within a certain project

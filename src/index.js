@@ -25,6 +25,11 @@ if (!storage || !localStorage.getItem("projectsList")) {
 let activeTask;
 let activeProject = "All Tasks";
 
+for (let project of Object.keys(projects.list)) {
+    if (project !== "All Tasks") {
+        displayController.displayProjectTab(project);
+    }
+}
 displayController.displayProject(activeProject, projects.list[activeProject]);
 
 // Handles click events
