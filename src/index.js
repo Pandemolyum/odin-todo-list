@@ -49,7 +49,7 @@ document.addEventListener("click", (e) => {
         e.target.textContent = (activeTask.isCompleted) ? "Mark Incompleted" : "Mark Completed";
     } else if (e.target.className === "task delete") {
         // When clicking the Delete task button
-        projects.removeTask(activeProject, activeTask);
+        projects.removeTask(activeTask);
         displayController.displayProject(activeProject, projects.list[activeProject]);
     } else if (e.target.className === "task discard") {
         // When clicking the Discard button

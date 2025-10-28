@@ -33,8 +33,8 @@ const projects = {
         this.list[projectName].push(task);
     },
 
-    removeTask: function(projectName, task) {
-        this.list[projectName] = this.list[projectName].filter((e) => e !== task);
+    removeTask: function(task) {
+        this.list[task.projectName] = this.list[task.projectName].filter((e) => e !== task);
     },
 
     getTask: function(uuid) {
