@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isYesterday, isToday, isTomorrow, isBefore } from 'date-fns';
 
 class Task {
     constructor(projectName) {
@@ -77,8 +77,20 @@ const displayController = {
             taskTitle.textContent = task.title;
             taskCheck.type = "checkbox";
             taskDate.style.justifySelf = "right";
-            taskDate.textContent = task.dueDate;
+            if (isToday(task.dueDate)) {
+                taskDate.textContent = "Today";
+            } else if (isTomorrow(task.dueDate)) {
+                taskDate.textContent = "Tomorrow";
+            } else if (isYesterday(task.dueDate)) {
+                taskDate.textContent = "Yesterday";
+            } else {
+                taskDate.textContent = task.dueDate;
+            }
             taskDesc.textContent = task.description;
+
+            if (isBefore(task.dueDate, new Date())) {
+                taskDate.style.color = "red";
+            }
 
             this.onChangeTaskPriority(task, taskDiv);
 
